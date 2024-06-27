@@ -43,13 +43,11 @@ fun startGame() {
       board[from] = 0
       side = 1 - side
       if (check(side)) {
-        if (checkGameEnd(side)) {
-          println("绝杀！")
-          showBoard()
-          break
-        } else {
           println("将军！")
-        }
+      } else if (checkGameEnd(side)) {
+        println("结束！")
+        showBoard()
+        break
       }
       showBoard()
     } catch (e: IllegalMoveException) {

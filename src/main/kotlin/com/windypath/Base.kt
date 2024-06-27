@@ -352,23 +352,8 @@ fun check(lSide: Int): Boolean {
 
 /** 绝杀检测 */
 fun checkGameEnd(lSide: Int) : Boolean {
-  val sideTag = 48 - 16 * lSide
+  val sideTag = 32 - lSide * 16
   val p = piece[48 - sideTag]
-  // 下一步可能行走的位置
-  var n: Int
 
-  for (k in 0 until 4) { // 4个方向
-    n = p + kingDir[k]
-    if (legalPosition[side][n].and(positionMask[charToSubscript('K')]) != 0) {
-      if (board[n].and(sideTag) == 0) {
-        saveMove(p, n)
-        piece[48-sideTag] = n
-        if (!check(lSide)) {
-          return false
-        }
-        piece[48-sideTag] = p
-      }
-    }
-  }
-  return true
+  return p == 0
 }
